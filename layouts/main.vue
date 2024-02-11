@@ -1,25 +1,23 @@
 <template>
-  <div class="drawer" :class="isDrawerOpen ? 'drawer-open' : 'drawer-anan'">
-    <input id="sidebar" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content">
-      <AppHeader @open-drawer="openDrawer" isDrawerOpen/>
+  <div class="drawer bg-base-200" :class="drawerToggle ? 'lg:drawer-open' :null">
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" v-model="drawerToggle" />
+    <div class="drawer-content bg-base-200">
+      <AppHeader />
       <!-- Page content here -->
-      <div class="container p-3 lg:p-8">
+      <div class="container mx-auto p-4">
         <slot />
       </div>
     </div>
-    <AppSidebar @close-drawer="closeDrawer" isDrawerOpen/>
+    <AppSidebar />
   </div>
 </template>
 
 <script setup lang="ts">
-const isDrawerOpen = ref(false);
+const drawerToggle = ref(false);
 
-const openDrawer = () => {
-  isDrawerOpen.value = true;
-};
-
-const closeDrawer = () => {
-  isDrawerOpen.value = false;
-};
+useHead({
+  bodyAttrs: {
+    class: 'bg-base-200 h-dvh'
+  }
+})
 </script>

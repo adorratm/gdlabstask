@@ -1,9 +1,9 @@
 <template>
-  <div class="navbar bg-base-200 sticky top-0">
+  <div class="navbar bg-base-300 sticky top-0 z-50">
     <div class="flex-none">
-      <button @click="openDrawer" class="btn btn-square btn-ghost drawer-button" for="sidebar">
+      <label class="btn btn-square btn-ghost drawer-button" for="my-drawer">
         <Icon name="gg:menu" size="2em" />
-      </button>
+      </label>
     </div>
     <div class="flex-1">
       <NuxtLink to="/" title="GD Labs Job Application Task" class="btn btn-ghost sm:text-sm md:text-base lg:text-lg  w-fit">GD Labs Job Application Task</NuxtLink>
@@ -28,7 +28,7 @@
               title="Emre KILIÇ Linkedin"
               target="_blank"
             >
-              <Icon name="mdi:linkedin" size="1.5em" />
+              <Icon name="mdi:linkedin" class="text-[#0a66c2]" size="1.5em" />
               Linkedin
             </NuxtLink>
           </li>
@@ -47,11 +47,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-  const emit = defineEmits(['open-drawer']);
-  const openDrawer = () => {
-    // drawer'ı açmak için event emit et
-    emit('open-drawer');
-  };
-</script>
