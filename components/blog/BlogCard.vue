@@ -1,13 +1,13 @@
 <template>
     <div class="card h-full flex w-100 mx-3 bg-base-100 shadow-xl">
       <figure class="z-0">
-        <NuxtImg v-if="image" :src="image" :alt="title" />
+        <NuxtImg class="w-full" v-if="image" :src="image" :alt="title" />
       </figure>
       <div class="card-body">
         <h2 class="card-title">{{ title }}</h2>
         <p class=" text-clip ...">{{ description.slice(0,100) }}...</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-primary">Buy Now</button>
+          <NuxtLink :to="'/blogs/'+id" class="btn btn-primary">Read More</NuxtLink>
         </div>
       </div>
     </div>
@@ -16,6 +16,10 @@
 <script setup lang="ts">
 
 const props = defineProps({
+  id: {
+    type: Number,
+    required: true
+  },
   title: {
     type: String,
     required: true,
@@ -27,9 +31,6 @@ const props = defineProps({
   image: {
     type: String,
     required: true,
-  },
-  tags: {
-    type: Array,
   },
   author: {
     type: String,

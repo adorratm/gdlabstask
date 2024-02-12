@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode', 'nuxt-icon', "@nuxt/image","@pinia/nuxt"],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode', 'nuxt-icon', "@nuxt/image","@pinia/nuxt","vue3-carousel-nuxt"],
   colorMode: {
     preference: 'mytheme',
     fallback: 'light',
@@ -26,5 +26,5 @@ export default defineNuxtConfig({
     public: {
       API_URL: process.env.API_URL || 'http://localhost:3000',
     }
-  }
+  },
 })
