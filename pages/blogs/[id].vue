@@ -79,6 +79,5 @@ import { useMainStore,type Post } from '~/store';
   onMounted(async () => {
     await store.fetchPost(postId);
     post.value = store.post;
-    console.log(post.value)
   });
 </script>

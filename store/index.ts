@@ -70,7 +70,6 @@ export const useMainStore = defineStore('main', {
                 const comments = await fetch(useRuntimeConfig().public.API_URL + '/posts/' + this.post.id + '/comments')
                 this.post.comments = await comments.json()
 
-                console.log(this.post)
 
             } catch (e) {
                 console.error(e)
