@@ -132,6 +132,9 @@ const formatCommentBody = (comment) => {
 
 watchEffect(() => {
   comment.value = props.comment;
+  newComment.value = props.newComment;
+  commentList.value = props.commentList;
+  parentList.value = props.parentList;
 });
 
 function likeComment(arr,index) {
@@ -147,13 +150,15 @@ function deleteComment(arr,index) {
 }
 
 function editComment(arr,index) {
+  console.log(arr)
   newComment.index = index;
   newComment.body = comment.value.body;
   emit("editComment",arr, index);
 }
 
 function replyToComment(arr,index) {
-  newComment.replyTo = comment.value.author;
+  console.log(index)
+  newComment.replyTo = index;
   emit("replyToComment", arr,index);
 }
 
