@@ -54,6 +54,7 @@ const commentList = ref([...props.comments]);
 const commentInput = ref(null);
 
 let editCommentIndex = null;
+let parentIndex = null;
 
 commentList.value.forEach((comment) => {
   comment.likes = Math.floor(Math.random() * 100); // Rastgele 0-100 arası beğeni sayısı
@@ -79,10 +80,12 @@ const deleteComment = (arr,index) => {
   arr.splice(index, 1);
 };
 
-const editComment = (arr,index) => {
+const editComment = (arr,index,pIndex) => {
   // Yorumu düzenleme işlemleri
   newComment.value.body = arr[index].body;
+  newComment.value.replyTo = index;
   editCommentIndex = index;
+  parentIndex = pIndex;
   focusCommentInput();
 };
 
@@ -100,7 +103,14 @@ const postComment = async () => {
     };
 
     if(editCommentIndex !== null) {
-      commentList.value[editCommentIndex].body = newComment.value.body;
+      if(parentIndex !== null) {
+        console.log(commentList.value[parentIndex])
+        console.log(parentIndex)
+        commentList.value[parentIndex].children[editCommentIndex].body = newComment.value.body;
+      } else {
+        commentList.value[editCommentIndex].body = newComment.value.body;
+      }
+      parentIndex = null;
       editCommentIndex = null;
       newComment.value.body = "";
       newComment.value.replyTo = null;

@@ -50,7 +50,7 @@
           </button>
           <button
             v-if="comment.author === 'adorratm'"
-            @click="editComment(commentList,index)"
+            @click="editComment(commentList,index,parentIndex)"
             class="text-primary font-bold flex items-center"
           >
             <Icon name="mdi:edit" size="1em" class="mr-2" />
@@ -66,10 +66,11 @@
 <ol class="relative border-s border-gray-200 dark:border-gray-700 pl-5 ml-5">
   <BlogCommentsChild
         v-if="comment.children"
-        v-for="(childComment, index) in comment.children"
+        
+        v-for="(childComment, childIndex) in comment.children"
         :commentList="comment.children"
       :comment="childComment"
-      :index="index"
+      :index="childIndex"
       @likeComment="likeComment"
       @dislikeComment="dislikeComment"
       @deleteComment="deleteComment"
@@ -77,6 +78,7 @@
       @replyToComment="replyToComment"
       :newComment="newComment"
       :parentList="commentList"
+      :parentIndex="index"
     />
     </ol>
   <!-- END Comment Container  -->
@@ -100,10 +102,14 @@ const props = defineProps({
     type: Array,
     required: true,
   },
-    parentList: {
-        type: Array,
-        default: () => [],
-    },
+  parentList: {
+      type: Array,
+      default: () => [],
+  },
+  parentIndex: {
+    type: Number,
+    default: null,
+  },
 });
 
 const comment = ref({ ...props.comment });
@@ -149,11 +155,11 @@ function deleteComment(arr,index) {
   emit("deleteComment", arr,index);
 }
 
-function editComment(arr,index) {
+function editComment(arr,index,parentIndex) {
   console.log(arr)
   newComment.index = index;
   newComment.body = comment.value.body;
-  emit("editComment",arr, index);
+  emit("editComment",arr, index,parentIndex);
 }
 
 function replyToComment(arr,index) {
